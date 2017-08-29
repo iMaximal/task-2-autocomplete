@@ -40,7 +40,7 @@ export default class LiveSearch {
         this.elInput = document.querySelector(selector);
 
         this.elInput.addEventListener('keyup', this.doLiveSearch.bind(null, idOutputResult, postToURL, responseKey));
-        this.elInput.addEventListener('keydown', this.upDownEvent.bind(null, idOutputResult));
+        this.elInput.addEventListener('keydown', this.navigationInResults.bind(null, idOutputResult));
         this.elInput.addEventListener('focus', this.focusInEvent);
         this.elInput.addEventListener('blur', this.validate.bind(null, idOutputResult));
     }
@@ -106,7 +106,7 @@ export default class LiveSearch {
     };
 
 
-    upDownEvent = (id, event) => {
+    navigationInResults = (id, event) => {
         const elem = document.getElementById(id);
 
         if (elem && elem.firstElementChild.className !== CSS_BLIND) {
