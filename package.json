@@ -17,8 +17,13 @@
     },
     "keywords": [
         "AJAX",
+        "Autocomplete",
+        "ES5",
+        "ES6",
         "Express",
+        "Handlebars",
         "JavaScript",
+        "Live search",
         "PostgreSQL",
         "Sequelize"
     ],
