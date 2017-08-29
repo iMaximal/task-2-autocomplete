@@ -1,0 +1,97 @@
+body
+    font 14px "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif
+    color #404040
+    line-height 20px
+
+a
+    color #00B7FF
+
+form
+    & > div
+        margin-bottom 10px
+
+.live-search
+    border 1px solid #d9d9d9
+    border-top-color #b2b2b2
+    box-sizing border-box
+    font-family inherit
+    font-size 14px
+    height 32px
+    line-height 32px
+    margin 0 0 18px 0
+    outline none
+    box-shadow none
+    padding 0 8px
+    width 300px
+    &:focus
+        border 1px solid #5199db
+        &::-webkit-input-placeholder
+            color #d9d9d9
+        &::-moz-placeholder
+            color #d9d9d9
+        &:-ms-input-placeholder
+            color #d9d9d9
+    &::-ms-clear
+        display none
+
+.live-search[placeholder]
+    text-overflow ellipsis
+
+.loading
+    background-color #ffffff
+    background-image url("/images/loader.gif")
+    background-size 25px 25px
+    background-position right center
+    background-repeat no-repeat
+
+#livesearch_results
+    position absolute
+    z-index 12
+    width 350px
+    min-width 240px
+    margin 0
+    padding 2px
+    border 1px solid #b2b2b2
+    box-shadow 0 0 5px #B1B1B1
+    list-style-type none
+    background #ffffff
+    li
+        padding 5px
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+        strong
+            font-family "Segoe UI Negreta", sans-serif
+
+#livesearch_results .highlighted,
+#livesearch_results li:hover
+    color #fff
+    background #5199db
+    text-decoration none
+
+.blind
+    color #c5c5c5
+
+.error
+    border 1px solid red
+
+.error-message
+    position absolute
+    color red
+
+/**
+Some adaptive
+*/
+@media screen and (max-width 736px)
+    form
+    & > label
+        width 100%
+
+    .live-search
+        box-sizing border-box
+        width 100%
+        margin-top 10px
+
+    #livesearch_results
+        box-sizing border-box
+        width 94%

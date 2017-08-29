@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live search</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/{{style}}"/>
+    <script defer src="javascripts/polyfills.js"></script>
+    <script defer src="javascripts/live-search.js"></script>
+</head>
+<body>
+<div>
+    <form onsubmit="return false">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div>
+            <label for="city-live-search"><span>Город</span></label>
+            <input id="city-live-search"
+                   class="live-search"
+                   name="city"
+                   placeholder="Начните вводить название города"
+                   type="text"
+                   autocomplete="off"
+                   pattern="^[Ё-е0-9\.\s-]+$"
+                   onClick="this.setSelectionRange(0, this.value.length)"
+            />
+            <span class="loader"></span>
+        </div>
+        <div>
+            <label for="street-live-search"><span>Улица</span></label>
+            <input id="street-live-search"
+                   class="live-search"
+                   name="street"
+                   placeholder="Начните вводить название улицы"
+                   type="text"
+                   autocomplete="off"
+                   pattern="^[Ё-е0-9\.\s-]+$"
+                   onClick="this.setSelectionRange(0, this.value.length)"
+            />
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

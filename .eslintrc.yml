@@ -1,0 +1,29 @@
+plugins:
+  - import
+
+env:
+  node: true,
+  browser: true,
+  es6: true
+
+rules:
+  func-names: [2, 'never']
+  arrow-parens: [2, 'as-needed']
+  arrow-body-style: [0, 'as-needed']
+  max-len: [2, 620, 4]
+  no-tabs: [2]
+  no-useless-escape: [0]
+  no-useless-computed-key: [0]
+
+parserOptions:
+  ecmaVersion: 8
+  sourceType: module
+
+  ecmaFeatures:
+    jsx: true
+    experimentalObjectRestSpread: true
+
+settings:
+  import/resolver:
+    node:
+      moduleDirectory: ['node_modules', './src']
