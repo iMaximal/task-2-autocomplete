@@ -33,7 +33,7 @@ export default class LiveSearch {
         this.transport = new Transport(
             param => this.getState(param),
             (...args) => this.view.renderResult(...args),
-            target => this.view.renderResult(target)
+            target => this.view.hideLoader(target)
             );
 
 
@@ -88,7 +88,7 @@ export default class LiveSearch {
 
         this.newRequestHandler(target);
 
-        this.transport.sendXHR(id, target, toURL, responseKey);
+        this.transport.sendFetch(id, target, toURL, responseKey);
     };
 
     newRequestHandler = (target) => {

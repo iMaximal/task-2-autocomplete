@@ -2,6 +2,9 @@ import {
     ERROR_CONNECTION,
     NOT_FOUND
 } from './constants'
+import Promise from 'promise-polyfill';
+import {request} from 'fetch-to-request'
+
 
 export default class Transport {
 
@@ -9,64 +12,51 @@ export default class Transport {
         this.getState = getState;
         this.renderResult = renderResult;
         this.hideLoader = hideLoader;
+
+        // To add to window
+        if (!window.Promise) {
+            window.Promise = Promise;
+        }
     };
 
-    sendXHR = (id, target, toURL, responseKey) => {
-
-        const xhr = this.getXmlHttp();
-
-        xhr.open('POST', toURL, true);
-
+    sendFetch = (id, target, toURL, responseKey) => {
         const csrfCookie = document.cookie.match(/_csrf=([\w-]+)/);
-        if (csrfCookie) {
-            xhr.setRequestHeader("X-CSRF-TOKEN", csrfCookie[1]);
-        }
 
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        const options = {
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'X-CSRF-TOKEN': csrfCookie[1],
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            mode: 'cors'
+        };
 
-        const fieldValue = JSON.stringify({
-            name: target.value.trim()
-        });
+        const data = {name: target.value.trim()};
 
-        xhr.send(fieldValue);
+        request.post(toURL, data, options)
+        // response as JSON
+            .then(response => {
+                // response ready -> cancel loader task
+                clearTimeout(this.getState('timer'));
 
-        xhr.onreadystatechange = () => {
-
-            if (xhr.readyState !== 4) return;
-            // response ready -> cancel loader task
-            clearTimeout(this.getState('timer'));
-
-            if (xhr.status !== 200) {
-                this.renderResult(target, id, ERROR_CONNECTION);
-            } else {
                 // all good -> data exist and loaded
                 if (this.getState('loader')) {
                     this.hideLoader(target);
                 }
-                const result = JSON.parse(xhr.responseText);
-                if (result.length > 0) {
-                    this.renderResult(target, id, result, responseKey);
+
+                if (response.length > 0) {
+                    this.renderResult(target, id, response, responseKey);
                 } else {
                     this.renderResult(target, id, NOT_FOUND);
                 }
-            }
-        };
+            })
+            // error object { status, message }
+            .catch(error => {
+                this.renderResult(target, id, ERROR_CONNECTION);
+            })
+
     };
 
-    getXmlHttp = () => {
-        let xmlhttp;
-        try {
-            xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            try {
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (E) {
-                xmlhttp = false;
-            }
-        }
-        if (!xmlhttp && typeof XMLHttpRequest !== 'undefined') {
-            xmlhttp = new XMLHttpRequest();
-        }
-        return xmlhttp;
-    };
 }

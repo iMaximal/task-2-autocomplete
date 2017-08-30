@@ -142,7 +142,7 @@ export default class View {
         }
     };
 
-    getCoords = (elem) => {
+    getCoords = elem => {
         const box = elem.getBoundingClientRect();
 
         const body = document.body;

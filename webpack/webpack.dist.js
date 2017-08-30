@@ -9,15 +9,7 @@ module.exports = {
     plugins: [
         new AssetsPlugin({
             filename: 'live-search.json',
-            path: 'manifest',
-            processOutput(assets) {
-                for (const key in assets) {
-                    assets[`${key}.js`] = assets[key].js.slice('/javascripts/'.length)
-                    delete assets[key]
-                }
-
-                return JSON.stringify(assets)
-            }
+            path: 'manifest'
         })
     ]
 }
