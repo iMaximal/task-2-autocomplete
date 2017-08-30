@@ -5,8 +5,10 @@ import {
     ARROW_DOWN,
     CSS_BLIND,
     CSS_HIGHLIGHTED,
-    ESC,
     ENTER,
+    ERROR_CONNECTION,
+    ERROR_NOT_FOUND,
+    ESC,
     NOT_CHOICE,
 } from './constants'
 import View from './view';
@@ -31,9 +33,7 @@ export default class LiveSearch {
         );
 
         this.transport = new Transport(
-            param => this.getState(param),
-            (...args) => this.view.renderResult(...args),
-            target => this.view.hideLoader(target)
+            (target, id, response, responseKey) => this.responseHandler(target, id, response, responseKey)
             );
 
 
@@ -103,6 +103,24 @@ export default class LiveSearch {
         this.state.timer = setTimeout(() => {
             this.view.showLoader(target);
         }, 500);
+    };
+
+    responseHandler = (target, id, response, responseKey) => {
+        clearTimeout(this.state.timer);
+
+        if (response === 503) {
+            this.view.renderResult(target, id, ERROR_CONNECTION);
+        } else {
+            // all good -> data exist and loaded
+            if (this.view.state.loader) {
+                this.view.hideLoader(target);
+            }
+            if (response.length > 0) {
+                this.view.renderResult(target, id, response, responseKey);
+            } else {
+                this.view.renderResult(target, id, ERROR_NOT_FOUND);
+            }
+        }
     };
 
 

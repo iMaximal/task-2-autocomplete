@@ -5,8 +5,8 @@ export const ARROW_DOWN = 40
 export const ESC = 27
 export const ENTER = 13
 export const ERROR_CONNECTION = 'Что-то пошло не так. Проверьте соединение с интернетом и попробуйте еще раз'
+export const ERROR_NOT_FOUND = 'Не найдено'
 export const NOT_CHOICE = 'Выберите значение из списка'
-export const NOT_FOUND = 'Не найдено'
 // text style if error in search result
 export const CSS_BLIND = 'blind'
 // error style for input

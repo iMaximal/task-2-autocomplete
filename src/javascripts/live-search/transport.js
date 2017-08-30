@@ -1,17 +1,11 @@
-import {
-    ERROR_CONNECTION,
-    NOT_FOUND
-} from './constants'
 import Promise from 'promise-polyfill';
 import {request} from 'fetch-to-request'
 
 
 export default class Transport {
 
-    constructor(getState, renderResult, hideLoader) {
-        this.getState = getState;
-        this.renderResult = renderResult;
-        this.hideLoader = hideLoader;
+    constructor(responseHandler) {
+        this.responseHandler = responseHandler;
 
         // To add to window
         if (!window.Promise) {
@@ -38,23 +32,11 @@ export default class Transport {
         request.post(toURL, data, options)
         // response as JSON
             .then(response => {
-                // response ready -> cancel loader task
-                clearTimeout(this.getState('timer'));
-
-                // all good -> data exist and loaded
-                if (this.getState('loader')) {
-                    this.hideLoader(target);
-                }
-
-                if (response.length > 0) {
-                    this.renderResult(target, id, response, responseKey);
-                } else {
-                    this.renderResult(target, id, NOT_FOUND);
-                }
+                this.responseHandler(target, id, response, responseKey);
             })
             // error object { status, message }
             .catch(error => {
-                this.renderResult(target, id, ERROR_CONNECTION);
+                this.responseHandler(target, id, 503);
             })
 
     };
