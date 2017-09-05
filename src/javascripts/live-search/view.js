@@ -15,8 +15,7 @@ export default class View {
         this.state = {
             error: false,
             firstResult: null,
-            loader: false,
-            timer: null
+            loader: false
         };
     };
 
@@ -74,12 +73,11 @@ export default class View {
         }
     };
 
-    hideLoader = (elem, ms) => {
-        let term = ms || 1000;
+    hideLoader = (elem, ms = 1000) => {
         setTimeout(() => {
             elem.classList.remove(CSS_LOADER);
             this.state.loader = false;
-        }, term);
+        }, ms);
     };
 
     removeSearchResult = (selectorId) => {
@@ -142,7 +140,7 @@ export default class View {
         }
     };
 
-    getCoords = elem => {
+    getCoords = (elem) => {
         const box = elem.getBoundingClientRect();
 
         const body = document.body;
