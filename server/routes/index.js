@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const csrf = require('csurf')
 // setup route middlewares
 const csrfProtection = csrf({ cookie: true })
+const jsonParser = bodyParser.json();
 // for validate FORM submit
 const parseForm = bodyParser.urlencoded({ extended: false })
 

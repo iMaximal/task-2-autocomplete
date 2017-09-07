@@ -7,7 +7,7 @@ import {
     ENTER,
     ERROR_CONNECTION,
     NOT_CHOICE,
-    NOT_FOUND
+    ERROR_NOT_FOUND
 } from './live-search/constants'
 
 
@@ -124,7 +124,7 @@ var LiveSearch = (function () {
                     if (result.length > 0) {
                         showSearchResult(target, id, result, responseKey);
                     } else {
-                        showSearchResult(target, id, NOT_FOUND);
+                        showSearchResult(target, id, ERROR_NOT_FOUND);
                     }
                 }
             };
