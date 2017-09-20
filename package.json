@@ -8,7 +8,6 @@
         "sf": "nsp check --output summary",
         "start": "node ./bin/www",
         "nodemon": "nodemon ./bin/www",
-        "test": "jasmine",
         "watch": "gulp watch"
     },
     "repository": {

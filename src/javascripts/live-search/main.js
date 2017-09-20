@@ -45,11 +45,11 @@ export default class LiveSearch {
         this.elInput.addEventListener('blur', this.validate.bind(null, idOutputResult));
     }
 
-    getState = param => {
+    getState = (param) => {
       return this.state[param]
     };
 
-    changeState = obj => {
+    changeState = (obj) => {
         this.state = {...this.state, ...obj}
     };
 
@@ -162,7 +162,7 @@ export default class LiveSearch {
     };
 
 
-    focusInEvent = event => {
+    focusInEvent = (event) => {
         const el = event.target || event.srcElement;
         this.view.resetError(el);
         this.view.moveScrollUp(el);
