@@ -2,16 +2,16 @@ const cities = require('../models').cities;
 
 module.exports = {
     search(req, res) {
-        if(!req.body || !req.body.name) return res.sendStatus(400);
-        //Trim and escape the name field.
+        if (!req.body || !req.body.name) return res.sendStatus(400);
+        // Trim and escape the name field.
         req.sanitize('name').escape();
         req.sanitize('name').trim();
 
-        //Run the validators
+        // Run the validators
         const errors = req.validationErrors();
 
-        //Create a city object with escaped and trimmed data.
-        const city = { name: req.body.name };
+        // Create a city object with escaped and trimmed data.
+        const city = {name: req.body.name};
 
 
         if (errors) {

@@ -1,5 +1,9 @@
 
-# Автокомплит списка городов
+# AJAX Input search field (Автокомплит списка городов)
+
+Good starting secure build for Express + PostgreSQL.
+
+Technologies: ES5, ES6, Express (+ Helmet, Express Rate Limit, Express validator, Compression), Handlebars, PostgreSQL, Sequelize.
 
 ## Installation
 ```bash
@@ -23,6 +27,17 @@ npm run start
 - чистый ES5 ./src/javascripts/live-search.es5.js
 
 - чистый ES6 ./src/javascripts/live-search/main.js
+
+### Варианты оптимизации для уменьшения нагрузки на сервер
+- в // throttle увеличить время;
+- проверять минимальное количество символов для отправки на сервер;
+- кэшировать поиск на сервере;
+- предупреждать пользователя о неверной раскладке, ввод только допустимых символов;
+- если поиск ничего не нашел, не делать новых запросов при добавлении символов в конце или в начале строки (в решении используется регистронезависимый поиск iLike %string%).
+
+### Для пользовательского счастья:
+- убрать throttle (можно на сервере лимитировать запросы в ./app.js (limiter);
+- делать выборку из базы на основе региона/частотности/настроек пользователя.
 
 #### P.S
 
