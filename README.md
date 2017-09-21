@@ -1,6 +1,8 @@
 
 # AJAX Input search field (Автокомплит списка городов)
 
+> *"Впечатление по тестовому прекрасное." © СКБ-Контур*
+
 Good starting secure build for Express + PostgreSQL.
 
 Technologies: ES5, ES6, Express (+ Helmet, Express Rate Limit, Express validator, Compression), Handlebars, PostgreSQL, Sequelize.
